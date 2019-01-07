@@ -207,6 +207,7 @@ export class GalleryComponent implements OnInit {
 
   deleteImage() { // delete selected image
     this.images.splice(this.modalImage.index, 1);
+    this.dates.splice(this.modalImage.index, 1);
     if (this.updateStorage(JSON.stringify(this.images))) {
       alert("Deleted Successfully");
       this.updateModalImage();
