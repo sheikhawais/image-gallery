@@ -1,0 +1,101 @@
+<div class="container-fluid">
+  <div class="row">
+    <div id="header" class="col-md-12">
+      <div class="row">
+        <div class="col-md-6">
+          <h3>Image Gallery</h3>
+        </div>
+        <div class="col-md-6 text-right btn-container">
+          <button role="button" class="btn btn-danger add-button" (click)="triggerFileClick()">+</button>
+          <input type="file" #imagePicker id="image-picker" class="image-picker hidden" name="image-picker" (change)="handleFileSelect($event)" />
+        </div>
+      </div>
+    </div>
+    <div id="gallery" *ngIf="images.length" class="col-md-12">
+      <div class="row">
+        <ng-container *ngFor="let image of images; let i = index;">
+          <div class="col-one-fifth image-container" *ngIf="i < pagination.to && i >= pagination.from-1">
+              <a href="#" [ngClass]="{'thumbnail': true, 'landscape': true}">
+                <img class="img-responsive" [src]="image | sanitizeHtml" (click)="openImageViewer(image, i)"  alt="Image {{i}}"/>
+                <span class="date">Created: {{ dates[i] | date:'MMM d, y hh:mm:ss a'}}</span>
+              </a>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <div *ngIf="images.length" class="col-sm-12">
+      <div class="row">
+        <div class="col-sm-4 image-info">
+          Showing 
+          <span class="from">{{pagination.from}}</span> to <span class="to">{{pagination.to}}</span>
+          of <span class="total">{{pagination.totalRecords}}</span> images
+        </div>
+        <div class="col-sm-8">
+          <ul class="pagination pull-right">
+            <li [ngClass]="{'disabled': pagination.currentPage == 1}">
+              <a (click)="updatePagination(1)">&laquo;</a>
+            </li>
+            <li [ngClass]="{'disabled': pagination.currentPage == 1}">
+              <a (click)="updatePagination(pagination.currentPage-1)">&lsaquo;</a>
+            </li>
+            <ng-container *ngFor="let page of pagination.pages">
+              <li [ngClass]="{'active':page.isCurrent}">
+                <a (click)="updatePagination(page.page_num)">{{page.page_num}}</a>
+              </li>
+            </ng-container>
+            <li [ngClass]="{'disabled': pagination.currentPage == pagination.totalPages}">
+              <a (click)="updatePagination(pagination.currentPage+1)">&rsaquo;</a>
+            </li>
+            <li [ngClass]="{'disabled': pagination.currentPage == pagination.totalPages}">
+              <a (click)="updatePagination(pagination.totalPages)">&raquo;</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!images.length" id="no-image-message" class="col-md-12 text-center">
+      <h3>No Images Found</h3>
+      Click <a href="#" (click)="triggerFileClick()">here</a> to add image now.
+    </div>
+  </div>
+</div>
+
+<!-- hidden button to open modal -->
+<button id="openModalButton" #openModal [hidden]="true" data-toggle="modal" data-target="#image-viewer">Open Modal</button>
+
+<!-- modal to view full image -->
+<div id="image-viewer" class="modal fade" role="dialog" data-keyboard="true">
+  <button type="button" #closeModal class="close" data-dismiss="modal">&times;</button>
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <div [class]="modalImage.class+' modal-image-container'">
+          <a href="#" class="delete-image" (click)="deleteImage()"><i class="glyphicon glyphicon-trash"></i></a>
+          <img [src]="modalImage.image | sanitizeHtml" alt="Modal Image"/>
+          <span class="arrow arrow-prev" (click)="showPreviousImage()">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+          </span>
+          <span class="arrow arrow-next" (click)="showNextImage()">
+              <i class="glyphicon glyphicon-chevron-right"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12" style="margin-top:50px;">
+      <p><strong>Instructions about the gallery.</strong></p>
+      <ul>
+        <li>Left and right arrow keys can be used to view next and previous images in the modal.</li>
+        <li>When an image is opened delete button or delete key can be used to delete that image.</li>
+        <li>Pres ESC key to close image modal.</li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,146 @@
+#header {
+    margin-bottom: 30px;
+}
+.col-one-fifth {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: left;
+    width: 20%;
+}
+.image-container {
+    margin-bottom: 20px;
+}
+.image-container > .thumbnail {
+    min-height: 230px;
+    max-height: 230px;
+    position: relative;
+    overflow: hidden;
+}
+.image-container > .thumbnail > img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateX(-50%)translateY(-50%);
+       -moz-transform: translateX(-50%)translateY(-50%);
+            transform: translateX(-50%)translateY(-50%);
+}
+.image-container > .thumbnail > .date {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: #1abc9c;
+    left: 0;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    font-size: 15px;
+    color: #fff;
+}
+.btn-container {
+    padding-top: 20px;
+}
+.btn-container > .btn.add-button {
+    border-radius: 50%;
+    font-size: 36px;
+    width: 50px;
+    height: 50px;
+    line-height: 40px;
+    padding: 0;
+    outline: none;
+}
+#no-image-message {
+    padding-top: 100px;
+}
+#image-viewer .modal-dialog {
+    width: calc(100% - 300px);
+    height: 90%;
+    margin: 30px auto;
+}
+#image-viewer .modal-content {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    height: 100%;
+}
+#image-viewer .modal-header {
+    border: none;
+}
+#image-viewer .modal-body {
+    height: 100%;
+}
+#image-viewer .modal-body .modal-image-container {
+    position: absolute;
+    transform: translateY(-50%)translateX(-50%);
+    top: 50%;
+    left: 50%;
+}
+#image-viewer .modal-body .modal-image-container.square {
+    max-width: 70%;
+}
+#image-viewer .modal-body .modal-image-container.square>img {
+    width: 100%;
+}
+#image-viewer .modal-body .modal-image-container.landscape {
+    width: 100%;
+    height: auto;
+}
+#image-viewer .modal-body .modal-image-container.landscape > img {
+    width: 100%;
+    height: auto;
+}
+#image-viewer .modal-body .modal-image-container.portrait,
+#image-viewer .modal-body .modal-image-container.portrait > img {
+    height: 100%; 
+    width: auto;
+}
+#image-viewer .modal-body .modal-image-container > a {
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    height: 50px;
+    width: 50px;
+    line-height: 55px;
+    background-color: red;
+    color: #fff;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 18px;
+}
+#image-viewer .close {
+    font-size: 36px;
+    color: #fff;
+    opacity: 1;
+    font-weight: normal;
+    outline: none;
+    margin-right: 15px;
+    margin-top: 10px;
+}
+.arrow {
+    position: absolute;
+    top: 50%;
+    font-size: 42px;
+    margin-top: -30px;
+    color: #fff;
+    cursor: pointer;
+}
+.arrow.arrow-prev {
+    left: -75px;
+}
+.arrow.arrow-next {
+    right: -75px; 
+}
+.image-info {
+    padding: 23px 15px;
+    font-size: 20px;
+}
+.pagination > li:not(.disabled) > a {
+    cursor: pointer;
+}
+
+@media screen and (min-width: 1200px) {
+    #image-viewer .modal-dialog {
+        width: calc(100% - 400px);
+    }
+}
