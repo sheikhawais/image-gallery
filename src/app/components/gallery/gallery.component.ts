@@ -84,6 +84,10 @@ export class GalleryComponent implements OnInit {
     this.pagination.recordsPerPage = this.pagination.perPageAllowedRecords; // to reset records per page when new image is added
     this.pagination.totalPages = Math.ceil(this.pagination.totalRecords/this.pagination.recordsPerPage);
     
+    if ( currentPage > this.pagination.totalPages ) { // when there is just one image on a page and it gets deleted. Page needs to be changed to previous
+      currentPage--;
+    }
+
     if ( currentPage < 1 || currentPage > this.pagination.totalPages)
       return false;
 
